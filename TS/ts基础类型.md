@@ -40,14 +40,14 @@ console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
 
 `ts中的类型断言简单来说就是先做好一个假设，使得编译通过,类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 它没有运行时的影响，只是在编译阶段起作用。 TypeScript会假设你，程序员，已经进行了必须的检查`
 
-**使用方式1：**尖括号语法 <推断的类型>值
+**使用方式1：**尖括号语法 ，<推断的类型>值
 
 ```tsx
 let someValue: any = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
-**使用方式2：**as语法 值 as 推断的类型（在ts中使用jsx时，只有as语法断言被允许）
+**使用方式2：**as语法 ，值 as 推断的类型（在ts中使用jsx时，只有as语法断言被允许）
 
 ```tsx
 let someValue: any = "this is a string";
@@ -58,3 +58,6 @@ let strLength: number = (someValue as string).length;
 
 
 
+### 类型推论
+
+**定义：**TS中,对没有明确指出类型的地方，类型推论会帮助提供类型
