@@ -2,7 +2,23 @@
 
 ### [TS基础笔记文档](https://juejin.cn/post/6872111128135073806#heading-9)
 
-### enum枚举
+
+
+### 空值 Void
+
+**定义：**void表示没有任何返回值的函数
+
+**注意：**声明void类型的变量毫无意义，因为只能将它赋值为undefined和null
+
+```tsx
+function alertName(): void {
+    alert('My name is Tom');
+}
+```
+
+
+
+### 枚举 enum
 
 `ts中的枚举类型和普通的js对象本质上没有区别，只是对于开发者来说，相较于直接使用值类型去做判断，枚举类型更易读，能够提升代码的可读性和易维护性`
 
@@ -40,14 +56,14 @@ console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
 
 `ts中的类型断言简单来说就是先做好一个假设，使得编译通过,类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 它没有运行时的影响，只是在编译阶段起作用。 TypeScript会假设你，程序员，已经进行了必须的检查`
 
-**使用方式1：**尖括号语法 ，<推断的类型>值
+**使用方式1 ：**尖括号语法 ，<推断的类型>值
 
 ```tsx
 let someValue: any = "this is a string";
 let strLength: number = (<string>someValue).length;
 ```
 
-**使用方式2：**as语法 ，值 as 推断的类型（在ts中使用jsx时，只有as语法断言被允许）
+**使用方式2 ：**as 语法 ，值 as 推断的类型（在ts中使用 tsx 时，只有as语法断言被允许）
 
 ```tsx
 let someValue: any = "this is a string";
