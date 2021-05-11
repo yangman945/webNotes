@@ -2,9 +2,44 @@
 
 ### [TS基础笔记文档](https://juejin.cn/post/6872111128135073806#heading-9)
 
-### any
+### 任意类型 any
 
 **定义：**表示允许赋值为任意类型，在any类型上访问任何属性和方法都是被允许的
+
+**注意：**any作为类型系统的顶级类型，我们在开发中应该尽量避免滥用它
+
+
+
+### 未知 unknown
+
+**定义：**与any类型相识，所有类型都可以归为unknown，但无法将unknown类型的值赋值给其他类型变量
+
+```tsx
+// 将value定义为unknown类型，value可以接收任意类型的值
+let value: unknown;
+value = true;             // OK
+value = 42;               // OK
+value = "Hello World";    // OK
+value = [];               // OK
+value = {};               // OK
+value = Math.random;      // OK
+value = null;             // OK
+value = undefined;        // OK
+value = new TypeError();  // OK
+
+// 将类型为unknown的value赋值给any之外的类型变量均报错
+let value: unknown;
+let value1: unknown = value;   // OK
+let value2: any = value;       // OK
+let value3: boolean = value;   // Error
+let value4: number = value;    // Error
+let value5: string = value;    // Error
+let value6: object = value;    // Error
+let value7: any[] = value;     // Error
+let value8: Function = value;  // Error
+```
+
+
 
 
 

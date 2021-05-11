@@ -83,3 +83,35 @@ let tom: Person = {
 }
 ```
 
+
+
+**可索引类型：**ts支持两种索引签名，string和number
+
+
+
+### 使用接口表示函数类型
+
+
+
+```tsx
+interface searchFunc(){
+    （source:string,substring:string）：Boolean
+}
+// 对于函数类型的类型检查来说，函数的参数名不需要与接口里定义的名字相匹配，只需在对应的位置参数类型兼容即可
+let mySearch: SearchFunc;
+mySearch = function(src, sub) {
+    let result = src.search(sub);
+    return result > -1;
+}
+```
+
+
+
+
+
+### interface和type的关系
+
+**注意：**一般来说，能用interface实现就用interface
+
+**不同点**
+
