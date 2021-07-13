@@ -39,7 +39,7 @@ module.exports = {
 
 ### views
 
-- home.vue   	主页面
+- home   	主页面
 
 
 
@@ -47,13 +47,15 @@ module.exports = {
 
 - common	全局公共组件
 - elementPlus/index.ts     负责elementUI组件的按需引入
-- home    home.vue主页面拆分组件
+- globalPlus/index.js  全局组件的引入
 
 
 
 ### api
 
-- common.ts	axios公共文件
+- request.js	接口处理文件
+- index.js    接口模块的集中引入和导出
+- modules    接口模块存放文件夹
 
 
 
