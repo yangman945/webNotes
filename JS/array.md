@@ -46,7 +46,6 @@ console.log(aryB) // 6
 let colors = ["red", "green", "blue", "yellow", "purple"];
 let colors2 = colors.slice(1);
 let colors3 = colors.slice(1, 4);
-console.log(colors)   // red,green,blue,yellow,purple
 concole.log(colors2); // green,blue,yellow,purple
 concole.log(colors3); // green,blue,yellow
 ```
