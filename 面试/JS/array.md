@@ -191,7 +191,7 @@ console.log(someResult) // true
 
 ```js
 /**
-*@method some() 遍历数组元素是否全部符合条件
+*@method eveny() 遍历数组元素是否全部符合条件
 *@return {Boolean} 返回查找条件的结果 全部符合返回 true 不存在 false
 */
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
@@ -205,7 +205,7 @@ console.log(everyResult) // false
 
 ```js
 /**
-*@method some() 遍历数组返回符合条件的元素
+*@method filter() 遍历数组返回符合条件的元素
 *@return {array} 返回符合条件的新数组
 */
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
