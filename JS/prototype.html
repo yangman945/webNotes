@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let Person = function(name,age,sex){
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        Person.prototype.sayName = function(){
+            console.log('我的名字叫'+this.name)
+        }
+        let tong = new Person('Tong',18,'man')
+        let jenny = new Person('Jenny',38,'woman')
+        console.log(tong.__proto__ === jenny.__proto__) // ture 两者的_proto_共用Person的原型
+        console.log(tong.prototype === jenny.prototype) // ture 两者共用Person的原型
+        console.log(tong.__proto__  === Person.prototype) // ture
+        console.log(Person.prototype.constructor  === Person) // ture Person的原型的实例对象指回自身
+
+    </script>
+</body>
+</html>
