@@ -109,9 +109,31 @@ mySearch = function(src, sub) {
 
 
 
-### interface和type的关系
+### [interface和type的关系](https://www.cnblogs.com/liuzhenwei/p/12530928.html)
 
 **注意：**一般来说，能用interface实现就用interface
 
 **不同点**
+
+interface可以用来限制class，而type不能implement
+
+```js
+interface man {
+    ...
+}
+class person implement man {
+	......
+}
+```
+
+interface可以extends，而type不行
+
+```js
+interface man {
+    ...
+}
+interface tong extends man {
+	hobby:string
+}
+```
 

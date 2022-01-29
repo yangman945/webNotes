@@ -235,3 +235,4 @@ console.log(filterResult); // [undefined,undefined,4,6]
 // map return true 是return turn 
 ```
 
+### join reduce
