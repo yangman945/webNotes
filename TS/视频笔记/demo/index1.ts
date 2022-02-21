@@ -1,5 +1,8 @@
-function test():void{
-    let sayName:string = 'hehehe'
-    console.log(sayName)
+class Person {
+    public readonly name :string;
+    constructor(_name:string ){
+        this.name = _name;
+    }
 }
-test()
+let tong = new Person('托尼')
+console.log(tong.name)
