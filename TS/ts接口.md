@@ -89,12 +89,12 @@ let tom: Person = {
 
 
 
-### 使用接口表示函数类型
+#### 使用接口描述函数类型
 
 
 
 ```tsx
-interface searchFunc(){
+interface searchFunc{
     （source:string,substring:string）：Boolean
 }
 // 对于函数类型的类型检查来说，函数的参数名不需要与接口里定义的名字相匹配，只需在对应的位置参数类型兼容即可
@@ -105,11 +105,21 @@ mySearch = function(src, sub) {
 }
 ```
 
+#### 使用接口表示描述数组
+
+```js
+interface NumberArray {
+    [index: number]: number;   //只要 index 的类型是 number，那么值的类型必须是 number。
+}
+let fibonacci: NumberArray = [1, 1, 2, 3, 5];
+
+```
 
 
 
 
-### [interface和type的关系](https://www.cnblogs.com/liuzhenwei/p/12530928.html)
+
+#### [interface和type的关系](https://www.cnblogs.com/liuzhenwei/p/12530928.html)
 
 **注意：**一般来说，能用interface实现就用interface
 
@@ -126,7 +136,7 @@ class person implement man {
 }
 ```
 
-interface可以extends，而type不行
+interface可以extends，而type不行，typs使用&来合并类型
 
 ```js
 interface man {
@@ -135,5 +145,6 @@ interface man {
 interface tong extends man {
 	hobby:string
 }
+    
 ```
 

@@ -1,8 +1,13 @@
-class Person {
-    public readonly name :string;
-    constructor(_name:string ){
-        this.name = _name;
-    }
+type UserType = {
+    getName(name:string):void,
+    getAge(age:number):void
 }
-let tong = new Person('托尼')
-console.log(tong.name)
+type AugmentedActionContext = {
+    commit<K extends keyof UserType>(
+      key: K,
+      payload: Parameters<UserType[K]>[1]
+    ): ReturnType<UserType[K]>;
+  }
+  
+  type User = (name:string,age:number) => string | number
+  type GetUser = Parameters<User>

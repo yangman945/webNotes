@@ -14,6 +14,8 @@
 
 **定义：**与any类型相识，所有类型都可以归为unknown，但无法将unknown类型的值赋值给其他类型变量
 
+`unknown可以赋值为任意类型，但除any外，unknown无法替代任何已知类型`
+
 ```tsx
 // 将value定义为unknown类型，value可以接收任意类型的值
 let value: unknown;
