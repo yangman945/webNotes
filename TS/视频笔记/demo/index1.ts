@@ -10,4 +10,5 @@ type AugmentedActionContext = {
   }
   
   type User = (name:string,age:number) => string | number
-  type GetUser = Parameters<User>
+  type GetUser = Parameters<User>[1]
+//   const aaa:GetUser = ['1',1]

@@ -29,3 +29,14 @@ function getString(something: string | number): string {
 // toString()属于共有属性，可以成功通过编译
 ```
 
+
+
+### 条件类型
+
+- 条件类型是有条件表达式所决定的类型
+- 条件类型具有不唯一性，增加了语言的灵活性
+
+#### RetureType
+
+
+
