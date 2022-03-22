@@ -235,4 +235,26 @@ console.log(filterResult); // [undefined,undefined,4,6]
 // map return true 是return turn 
 ```
 
-### join reduce
+
+
+
+
+### reduce
+
+```js
+/**
+*@method sort() 排序
+*@return {array} 返回升序或降序后的数组
+*@params {x} 小值
+*@params {y} 大值
+*/
+let arr = [1,2,3,4,5,6,7,8,9]
+arr.sort((x,y)=>{
+    // x 与 y 返回值小于 0 时 升序
+    // x 与 y 返回值大于 0 时 降序
+    // x 与 y 返回值等于于 0 时 x与y位置不变
+	return x - y
+ })
+console.log(arr)
+```
+

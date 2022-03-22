@@ -213,3 +213,31 @@ Object.prototype.toString.call(123).slice(8,-1)  // Number
 
 
 
+#### 函数柯里化
+
+把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数。
+
+```js
+function currying() {
+      // 第一次执行时，定义一个数组专门用来存储所有的参数
+      let args = Array.prototype.slice.call(arguments);
+      // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+      let inner = function () {
+        args.push(...arguments);
+        // 递归调用内部返回函数
+        return inner;
+      };
+      // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+      inner.toString = function () {
+        return args.reduce((perv, cur) => {
+          return perv + cur;
+        }, 0);
+      };
+      return inner;
+    }
+    //  若内部函数调用toString改写函数返回值无效 需要以下这种方法调用
+    let result = currying(1)(2)(3).toString();
+    console.log(result);
+```
+
+ 

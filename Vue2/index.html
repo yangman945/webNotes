@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="name">{{name}}</h1>
+  </body>
+  <script>
+    let ele = document.querySelector("#name")
+    let self = new SelfVue({
+      name:'hello world'
+    },ele,name)
+    // 处理数据为array的情况
+    // const arrayProto = Array.prototype;
+    // const newArray = Object.create(arrayProto);
+    // ["push", "pop", "shift", "unshift"].forEach((item) => {
+    //   newArray[item] = function () {
+    //     console.log("更新视图2");
+    //     arrayProto[item].call(this, ...arguments);
+    //   };
+    // });
+    window.setTimeout(function () {
+        console.log('name值改变了');
+        selfVue.data.name = 'canfoo';
+    }, 2000);
+    // 关联 observer 和 watcher
+    function SelfVue(data,el,exp){
+      this.data = data
+      observer(data)
+      el.innerHTML  = this.data[exp] //初始化模板数据的值
+      new Watcher(this,exp,function(value){
+        el.innerHTML = value
+      })
+    }
+    // 监听器 observer
+    function observer(target) {
+      if (typeof target !== "object" || target === null) return target;
+      if (Array.isArray(target)) {
+          console.log(newArray)
+        target._proto = newArray;
+      }
+      for (let key in target) {
+        defineReactive(target, key, target[key]);
+      }
+    }
+    function defineReactive(target, key, value) {
+      let dep = new Dep()
+      // 深度观察1 对象嵌套结构
+      observer(value);
+      Object.defineProperty(target, key, {
+        get: function () {
+          if(Dep.target){
+            dep.addSub(Dep.target) // 在这里添加一个订阅者
+          }
+          return value;
+        },
+        set: function (newVal) {
+          // 深度观察2 属性值被变为对象的情况
+          observer(newVal);
+          if (newVal !== value) {
+            value = newVal;
+            dep.notify() // 数据变化 通知订阅者
+            console.log("更新视图了");
+          }
+        },
+      });
+    }
+    
+
+    // 订阅器 Dep
+    function Dep(){
+      // watcher 订阅者成员
+      this.subs = []
+    }
+    Dep.prototype = {
+      addSub(sub){
+        this.subs.push(sub)
+      },
+      // 通知
+      notify(){
+        this.subs.forEach(item =>{
+          item.update()
+        })
+      }
+    }
+    Dep.target = null
+
+    // 订阅者 watcher
+    function Watcher(vm,exp,cb){
+      this.vm = vm
+      this.exp = exp
+      this.cb = cb
+      console.log(this._proto,"this")
+      this.value = this.get() //将自己添加到订阅器的操作
+    }
+    Watcher.prototype = {
+      update(){
+        this.run()
+      },
+      run(){
+        let value = this.vm.data[this.exp]
+        let oldVal = this.value
+        if(value !== oldVal){
+          this.value = value
+          this.cb.call(this.vm,value,oldVal)
+        }
+      },
+      get(){
+        Dep.target = this // 全局变量 订阅者 赋值
+        let value = this.vm.data[this.exp] //强制执行监听器里 get函数
+        Dep.target = null // 全局变量 订阅者 释放
+        return  value
+      }
+    }
+ 
+    // 解析器 Compile
+    function complieText(node,exp){
+      let self = this
+      let initText = this.vm[exp] //获取属性值
+      this.updateText(node,initText) // dom更新节点文本值
+      new Watcher(this.vm,exp,function(){
+        self.updateText(node,value)
+      })
+    }
+ 
+ 
+ 
+ </script>
+</html>
