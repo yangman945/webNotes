@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    class Commitment {
+      static PENDING = "等待中";
+      static FULFILLED = "成功的";
+      static REJECTED = "失败的";
+      constructor(func) {
+        this.result = null;
+        this.state = Commitment.PENDING;
+        this.resolveCallbacks = [];
+        this.rejectCallbacks = [];
+        try {
+          func(this.resolve.bind(this), this.reject.bind(this));
+        } catch (error) {
+          this.reject(error);
+        }
+      }
+
+      resolve(result) {
+        setTimeout(() => {
+          this.state = Commitment.FULFILLED;
+          this.result = result;
+          this.resolveCallbacks.forEach((callback) => {
+            callback(result);
+          });
+        });
+      }
+      reject(result) {
+        setTimeout(() => {
+          this.state = Commitment.REJECTED;
+          this.result = result;
+          this.rejectCallbacks.forEach((callback) => {
+            callback(result);
+          });
+        });
+      }
+      then(onFulfilled, onRejected) {
+        return new Promise((resolve, reject) => {
+          onFulfilled =
+            typeof onFulfilled === "function" ? onFulfilled : () => {};
+          onRejected = typeof onRejected === "function" ? onRejected : () => {};
+          if (this.state === Commitment.PENDING) {
+            this.resolveCallbacks.push(onFulfilled);
+            this.rejectCallbacks.push(onFulfilled);
+          }
+          if (this.state === Commitment.FULFILLED) {
+            setTimeout(() => {
+              onFulfilled(this.result);
+            });
+          }
+          if (this.state === Commitment.REJECTED) {
+            setTimeout(() => {
+              onRejected(this.result);
+            });
+          }
+        });
+      }
+      catch(onRejected) {
+        return this.then(undefined, onRejected);
+      }
+      finally(onFinally) {
+        return this.then(onFinally, onFinally);
+      }
+    }
+    let commitment = new Commitment((resolve, reject) => {
+      reject("最后一步");
+    });
+    commitment
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      }).finally((res)=>{
+        console.log(res)
+      });
+  </script>
+</html>
